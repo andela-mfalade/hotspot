@@ -1,2 +1,2 @@
 # hotspot
-Find and get direction to hotspots close to you..
+Find and get direction to hotels close to you..
