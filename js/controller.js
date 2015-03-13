@@ -1,13 +1,21 @@
 var App = angular.module('App', ['serviceModule']);
 App.controller('hotspotController', ['$scope', 'searchQuery', function($scope, searchQuery) {
     $scope.query = 'lagos';
+    $scope.queryLocation = $scope.query;
     $scope.searchHotels = function(query, event){
       if (event.which === 13 || event.type === 'click') {
+        //Clear form field on ENTER keypress and show query in left pane
+        if ($scope.query !== null) {
+          $scope.queryLocation = $scope.query;
+        }        
+        $scope.query = null; 
         searchQuery.getLatitudeLongitude($scope,query);
-        $scope.initialize();
+        (function(){
+          $scope.lat = $scope.latLong[0];
+          $scope.lng = $scope.latLong[1];                
+          $scope.initialize();          
+        })();
         $scope.hotels = searchQuery.getHotels(query, $scope);
-        $scope.lat = $scope.latLong[0];
-        $scope.lng = $scope.latLong[1];                
         console.log($scope.retreivedInfo);
       } 
     };

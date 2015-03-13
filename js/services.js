@@ -34,6 +34,7 @@ serviceModule.factory('searchQuery', ['$http', function($http) {
         if (status == google.maps.GeocoderStatus.OK)
         {
            s.latLong = [results[0].geometry.location.k, results[0].geometry.location.D];
+           return;
         }
       });
       

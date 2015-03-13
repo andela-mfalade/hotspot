@@ -19,14 +19,13 @@
           <div class="col-md-4"></div>
           <div class="col-md-4">
             <form class="main-search border-less-inputs navbar-form navbar-right" role="form" method="post">
-              <div class="input-row">
-                <div class="form-group">
-                  <div class="input-group location">
-                    <input type="text" class="form-control" id="location" placeholder="Enter Location" ng-model="query" ng-keyup="searchHotels(query,$event)">
-                    <span class="input-group-addon submitBtn"><i class="glyphicon glyphicon-search"></i></span>
+              <div class="form-group">
+                  <div class="icon-addon addon-lg">
+                      <input type="text" placeholder="Enter Location" class="form-control" id="email" ng-model="query" ng-keyup="searchHotels(query,$event)">
+                      <label for="email" class="glyphicon glyphicon-search"></label>
                   </div>
-                </div>
               </div>
+
             </form>                        
           </div>
 
@@ -39,14 +38,15 @@
           <article class="search-result row">
             <div class="col-md-3 panel hotelList">
               <div class="navbar-static-top resultsLabel" style="text-align:center">
-                <h2>Hotels in {{query}}<h2>
+                <h2>Hotels in {{queryLocation}}<h2>
               </div>
               <div class="panel panel-default" ng-repeat="hotel in retreivedInfo"> <!-- ngRepeat goes here -->
                 <div class="panel-heading">
                   <h4 class="panel-title">{{hotel.venue.name}}</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="list-group-item results row">
+                    <div class="list-group-item results">
+                    <div class="row">
                       <div class="col-md-5" >
                         <img ng-src="{{'images/icon1.png'}}" alt="{{hotel.name}}" />
                       </div>
@@ -56,7 +56,8 @@
                         </ul>
 
                         <button type="search" class="btn btn-success" ng-click="updateLatLng(hotel.venue.location.lat,hotel.venue.location.lng, hotel.name)"> View Location</button>                              
-                      </div>
+                      </div>                      
+                    </div>
                     </div>
                 </div>
               </div> 
