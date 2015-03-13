@@ -10,13 +10,13 @@ serviceModule.factory('searchQuery', ['$http', function($http) {
     getHotels: function(q, s) {
       var url = a + 'explore?' + id + secret + '&v=20130815&near=' + q + '&query=hotels';      
       $http.get(url).success(function(data){
-        s.retreivedInfo = data.response.groups[0].items;
+        s.hotels = data.response.groups[0].items;
       }).error(function(err){
         console.log('error: ',err);
       });
     },
 
-    getImageUrl: function(query,venueId,s) {
+    getImageUrl: function(query,venueId) {
       var imgUrl = a + venueId + id + secret + '&v=20130815&near=' + query + '&query=hotels';
       // console.log(imgUrl)
       $http.get(imgUrl).success(function(data){
@@ -27,14 +27,15 @@ serviceModule.factory('searchQuery', ['$http', function($http) {
       });
     },
 
-    getLatitudeLongitude: function(s, location) {
+    getLatitudeLongitude: function(location, cb) {
       var geocoder = new google.maps.Geocoder();
       var address = location;
       geocoder.geocode( { 'address': address}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK)
         {
-           s.latLong = [results[0].geometry.location.k, results[0].geometry.location.D];
-           return;
+          var latLong = [results[0].geometry.location.k, results[0].geometry.location.D];
+          // call the callback function with the latlng object
+          cb(latLong);
         }
       });
       
